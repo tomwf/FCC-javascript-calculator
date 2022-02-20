@@ -17,8 +17,6 @@ const Calculator = () => {
 
     // Display length limit to 20 digits
     if (input.length > 20) {
-      const display = document.querySelector('#display')
-
       // Digit limit met warning
       disableBtns(true)
 
@@ -31,7 +29,6 @@ const Calculator = () => {
 
     const target = event.target.value
     const isSign = /[\/x\-+]/.test(input)
-    const display = document.querySelector('#display')
 
     switch (target) {
       case 'AC':
@@ -145,7 +142,7 @@ const Calculator = () => {
     <div className="calculator">
       <div className="screen">
         <p id="prevOps">{prevOps}</p>
-        <div id="display">{input}</div>
+        <p id="display">{input}</p>
       </div>
       <div className="keypad">
         <button id="clear" value="AC">AC</button>
