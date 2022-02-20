@@ -46,7 +46,9 @@ const Calculator = () => {
           setInput(target)
           return
         }
-        return
+        setInput(input+target)
+        setPrevOps(prevOps+target)
+        break;
 
       case '1':
       case '2':
@@ -59,11 +61,14 @@ const Calculator = () => {
       case '9':
         if (input === '0') {
           setInput(target)          // Don't display leading zeros
+          setPrevOps(prevOps+target)
         } else {
           if (/\d+/.test(input)) {
             setInput(input+target)
+            setPrevOps(prevOps+target)
           } else {
             setInput(target)        // Prevent multiple operation sign
+            setPrevOps(prevOps+target)
           }
         }
         break;
@@ -79,12 +84,13 @@ const Calculator = () => {
           return
         }
         setInput(target)
+        setPrevOps(prevOps+target)
+
         break;
 
       case '.':
         // Display leading zero if this is the first input
         if (!prevOps) {
-          console.log('here')
           setInput('0.')
           setPrevOps('0.')
           return
@@ -92,7 +98,6 @@ const Calculator = () => {
 
         // Add zero before decimal immediately after sign
         if (isSign) {
-          console.log('here')
           setInput('0.')
           setPrevOps(prevOps+'0.')
           return
@@ -100,7 +105,6 @@ const Calculator = () => {
 
         // Prevent multiple dot within number
         if (!input.includes('.')) {
-          console.log('here')
           setInput(input+'.')
           setPrevOps(prevOps+'.')
           return
@@ -113,13 +117,12 @@ const Calculator = () => {
         }
 
         const total = eval(prevOps.replace(/x/g, '*').match(/\d.*/)[0])
-        console.log(total)
+        
         setInput(total)
         setPrevOps(prevOps+'= '+total)
         return
 
       default:
-        console.log('Invalid input')
         return
     }
 
@@ -127,8 +130,6 @@ const Calculator = () => {
     if (prevOps.includes('=')) {
       setInput(target)
       setPrevOps(target)
-    } else {
-      setPrevOps(prevOps+target)
     }
   }
 
