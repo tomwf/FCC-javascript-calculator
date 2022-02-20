@@ -1,0 +1,156 @@
+// Share Tech Mono font
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+// Variables
+$lightPurple: #c2c2d6;
+$black: #000000;
+$orange: #ffa500;
+$white: #ffffff;
+$red: rgb(172, 57, 57);
+$lightGray: rgb(102, 102, 102);
+$gray: #4d4d4d;
+$blue: rgb(0, 68, 102);
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  font-family: inherit;
+  color: inherit;
+  font-size: inherit;
+}
+
+body {
+  font-family: 'Share Tech Mono', sans-serif;
+  background-color: $lightPurple;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.calculator {
+  background-color: $black;
+  color: $white;
+  width: 334px;
+  padding: .25em;
+
+  .screen {
+    text-align: right;
+
+    #prevOps {
+      color: $orange;
+      min-height: 25.5px;
+      word-wrap: break-word;
+    }
+
+    #display {
+      font-size: 1.25rem;
+    }
+  }
+
+  .keypad {
+    margin-top: .25em;
+    font-size: 1.1rem;
+    display: grid;
+    gap: 1px;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(5, 65px);
+    grid-template-areas:
+    "clear clear divide multiply"
+    "seven eight nine subtract"
+    "four five six add"
+    "one two three equals"
+    "zero zero decimal equals";
+
+    button:hover {
+      outline: 1px solid $lightGray;
+      color: $black;
+    }
+    .operation {
+      background-color: $lightGray;
+    }
+
+    .number {
+      background-color: $gray;
+    }
+
+    #clear {
+      grid-area: clear;
+      background-color: $red;
+    }
+
+    #divide {
+      grid-area: divide;
+    }
+
+    #multiply {
+      grid-area: multiply
+    }
+
+    #seven {
+      grid-area: seven;
+    }
+
+    #eight {
+      grid-area: eight;
+    }
+
+    #nine {
+      grid-area: nine;
+    }
+
+    #subtract {
+      grid-area: subtract;
+    }
+
+    #four {
+      grid-area: four;
+    }
+
+    #five {
+      grid-area: five;
+    }
+
+    #six {
+      grid-area: six;
+    }
+
+    #add {
+      grid-area: add;
+    }
+
+    #one {
+      grid-area: one;
+    }
+
+    #two {
+      grid-area: two;
+    }
+
+    #three {
+      grid-area: three;
+    }
+
+    #equals {
+      grid-area: equals;
+      background-color: $blue;
+    }
+
+    #zero  {
+      grid-area: zero;
+    }
+
+    #decimal {
+      grid-area: decimal;
+    }
+  }
+}
+
+
