@@ -20,12 +20,10 @@ const Calculator = () => {
       const display = document.querySelector('#display')
 
       // Digit limit met warning
-      display.innerText = 'DIGIT LIMIT MET'
       disableBtns(true)
 
       // Remove warning
       setTimeout(() => {
-        display.innerText = input
         disableBtns(false)
       }, 1000)
       return
@@ -33,6 +31,7 @@ const Calculator = () => {
 
     const target = event.target.value
     const isSign = /[\/x\-+]/.test(input)
+    const display = document.querySelector('#display')
 
     switch (target) {
       case 'AC':
@@ -73,9 +72,14 @@ const Calculator = () => {
         }
         break;
 
+      case '-':
+        if (/[\/x+]/.test(input)) {
+          setInput(target)
+          setPrevOps(prevOps+target)
+          return
+        }
       case '/':
       case 'x':
-      case '-':
       case '+':
         // Prevent repeating sign
         if (isSign) {
@@ -116,10 +120,14 @@ const Calculator = () => {
           return
         }
 
-        const total = eval(prevOps.replace(/x/g, '*').match(/\d.*/)[0])
-        
-        setInput(total)
-        setPrevOps(prevOps+'= '+total)
+        try {
+          const total = Math.round(eval(prevOps.replace(/x/g, '*').match(/\d.*/)[0]) * 10000) / 10000
+
+          setInput(total)
+          setPrevOps(prevOps+'='+total)
+        } catch (e) {
+          console.log('Expression ending with a sign')
+        }
         return
 
       default:
@@ -137,7 +145,7 @@ const Calculator = () => {
     <div className="calculator">
       <div className="screen">
         <p id="prevOps">{prevOps}</p>
-        <p id="display">{input}</p>
+        <div id="display">{input}</div>
       </div>
       <div className="keypad">
         <button id="clear" value="AC">AC</button>
