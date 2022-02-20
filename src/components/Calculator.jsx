@@ -70,7 +70,7 @@ const Calculator = () => {
         break;
 
       case '-':
-        if (/[\/x+]/.test(input)) {
+        if (/\d[\/x+]$/.test(prevOps)) {
           setInput(target)
           setPrevOps(prevOps+target)
           return
@@ -118,7 +118,7 @@ const Calculator = () => {
         }
 
         try {
-          const total = Math.round(eval(prevOps.replace(/x/g, '*').match(/\d.*/)[0]) * 10000) / 10000
+          const total = Math.round(eval(prevOps.replace(/x/g, '*').match(/^-?\d.*/)[0]) * 10000) / 10000
 
           setInput(total)
           setPrevOps(prevOps+'='+total)
